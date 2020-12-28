@@ -92,6 +92,14 @@ public class Order implements Serializable {
 	public Set<OrderItem> getItems(){
 		return itens;
 	}
+	
+	public Double getTotal() {
+		double soma =0.0;
+		for (OrderItem x : this.itens) {
+			soma += x.getSubTotal();
+		}
+		return soma;
+	}
 
 
 	@Override
