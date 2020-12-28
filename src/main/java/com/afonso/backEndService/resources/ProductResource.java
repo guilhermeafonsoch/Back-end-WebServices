@@ -13,7 +13,7 @@ import com.afonso.backEndService.entities.Product;
 import com.afonso.backEndService.services.ProductService;
 
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping(value = "/products")
 public class ProductResource {
 	
 	@Autowired
