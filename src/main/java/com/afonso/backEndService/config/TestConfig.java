@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.afonso.backEndService.entities.Category;
 import com.afonso.backEndService.entities.Order;
+import com.afonso.backEndService.entities.OrderItem;
 import com.afonso.backEndService.entities.Product;
 import com.afonso.backEndService.entities.User;
 import com.afonso.backEndService.entities.enums.OrderStatus;
 import com.afonso.backEndService.repositories.CategoryRepository;
+import com.afonso.backEndService.repositories.OrderItemRepository;
 import com.afonso.backEndService.repositories.OrderRepository;
 import com.afonso.backEndService.repositories.ProductRepository;
 import com.afonso.backEndService.repositories.UserRepository;
@@ -32,8 +34,11 @@ public class TestConfig implements CommandLineRunner {
 	private CategoryRepository categoryRepository;
 	
 	@Autowired
-	private ProductRepository productepository;
+	private ProductRepository productRepository;
 
+	@Autowired
+	private OrderItemRepository orderItemRepository;
+	
 	@Override
 	public void run(String... args) throws Exception {
 
@@ -54,11 +59,17 @@ public class TestConfig implements CommandLineRunner {
 		Product p4 = new Product(null, "PC Gamer", "Donec aliquet odio ac rhoncus cursus.", 1200.0, "");
 		Product p5 = new Product(null, "Rails for Dummies", "Cras fringilla convallis sem vel faucibus.", 100.99, "");
 		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice()); 
+
+		
 		
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
 		categoryRepository.saveAll(Arrays.asList(cat1,cat2,cat3));
-		productepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+		productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
 		
 		p1.getCategories().add(cat2);
 		p2.getCategories().add(cat1);
@@ -67,7 +78,7 @@ public class TestConfig implements CommandLineRunner {
 		p4.getCategories().add(cat3);
 		p5.getCategories().add(cat2);
 		
-		productepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
+		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 		
 		
 	}
