@@ -3,6 +3,8 @@ package com.afonso.backEndService.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -52,8 +54,7 @@ public class UserService {
 		updateData(entity, obj);
 		return repository.save(entity);
 		}
-		catch(RuntimeException e) {
-			e.printStackTrace();
+		catch(EntityNotFoundException e) {
 			throw new ResourceNotFoundException(id);
 		}
 		
